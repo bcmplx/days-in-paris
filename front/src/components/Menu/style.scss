@@ -1,0 +1,81 @@
+@use 'src/styles/vars';
+
+.menu {
+  position: fixed;
+  right: 50px;
+  top: 200px;
+  background-color: vars.$secondary-color;
+  border-radius: 50px 50px 50px 50px;
+  box-shadow: 0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
+  padding: 1em 1.2em;
+  z-index: 1000;
+    &:hover {
+      transform: scale(1.05);
+    }
+  &-trash {
+    cursor: pointer;
+  }
+
+  &-activity {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    align-items: center;
+    
+    &-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    &-elem {
+      margin: 0.5em;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    &-text {
+      text-align: center;
+      margin: 0.5em;
+    }
+  }
+
+  &-link {
+    text-align: center;
+    background-color: vars.$secondary-color;
+    width: 80%;
+    margin: 0 auto 1em auto;
+    padding: 1em;
+    color: #fff;
+    border-radius: 20px;
+    font-weight: vars.$medium-weight;
+    font-size: vars.$subtitle-size;
+    position: relative;
+    box-shadow: 0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12), 0 8px 32px -8px hsla(0, 0%, 0%, 0.14), 0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+      transition: 0.2s;
+    }
+  }
+
+  &-icon {
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 630px) {
+    & {
+      position: absolute;
+      top: 80px;
+    }
+  }
+}
+
+
+

@@ -1,0 +1,24 @@
+@use 'reset';
+@use 'vars';
+
+
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
+
+body {
+  font-family: sans-serif;
+  font-family: 'Mukta', sans-serif;
+  // background: linear-gradient(white, vars.$primary-color-light);
+  background: vars.$primary-color-light;
+}
+
+/* 
+  // or you can import your own font
+  @font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto-Regular.ttf');
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+*/

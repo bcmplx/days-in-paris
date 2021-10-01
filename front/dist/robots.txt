@@ -1,0 +1,4 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+
+Sitemap: http://ec2-54-86-41-164.compute-1.amazonaws.com/sitemap

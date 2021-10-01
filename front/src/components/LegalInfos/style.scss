@@ -1,0 +1,43 @@
+@use 'src/styles/vars';
+
+.legal-infos {
+  width: 60%;
+  margin: auto;
+  
+  &-title {
+    margin-top: 1em;
+    text-align: center;
+    font-size: vars.$title-size;
+    font-weight: vars.$bold-weight;
+    color: vars.$primary-color;
+  }
+
+  &-description {
+    margin: 2em 0em;
+    font-size: vars.$subtitle-size;
+    font-weight: vars.$medium-weight;
+  }
+
+  &-section {
+    margin: 1em 0em;
+
+    &-title {
+      font-size: vars.$subtitle-size;
+      font-weight: vars.$bold-weight;
+      color: vars.$primary-color;
+      margin-bottom: 0.5em;
+    }
+
+    &-item {
+      margin: 1em 0em;
+      font-size: vars.$text-size;
+      line-height: 1.7;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    & {
+      width: 90%;
+    }
+  }
+}

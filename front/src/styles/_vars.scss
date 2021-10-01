@@ -1,0 +1,24 @@
+@use 'sass:color';
+
+// == import font 
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+
+$primary-color: #219EBC;
+$secondary-color: #FFB703;
+$third-color: #FB8500;
+
+
+$primary-color-light: color.scale($primary-color, $lightness: 85%);
+$primary-color-dark: color.scale($primary-color, $lightness: -50%);
+
+$light-weight: 300;
+$regular-weight: 400;
+$medium-weight: 500;
+$bold-weight: 700;
+
+
+$title-size: 2.4em;
+$subtitle-size: 1.1em;
+$text-size: 1em;
+
+$secondary-font: 'Cookie', cursive;

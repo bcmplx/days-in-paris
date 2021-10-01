@@ -1,0 +1,123 @@
+@use 'src/styles/vars';
+
+.wishlist {
+  &-content {
+    overflow-y: scroll;
+    height: 630px;
+    padding: 0.5em;
+    width: 100%;
+  }
+
+  &-header {
+    display: flex;
+    margin-bottom: 0.5em;
+    justify-content: center;
+
+    &-title {
+      text-align: center;
+      color: vars.$primary-color-dark;
+      font-weight: vars.$bold-weight;
+      text-transform: uppercase;
+    }
+    
+    &-delete-icon {
+      font-size: 0.9em;
+      color: vars.$primary-color-dark; 
+      margin-left: 1em;
+      cursor: pointer;
+    }
+  }
+    
+}
+
+
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em;
+    align-items: center;
+
+    &-icon {
+      margin: 0.5em;
+      text-align: center;
+      cursor: pointer;
+      color: vars.$primary-color-dark;
+
+      &:hover {
+        transform: scale(1.25);
+        transition: 0.3s;
+      }
+    }
+
+    &-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    &-title {
+      text-align: center;
+      margin: 0.5em;
+    }  
+
+}
+
+.react-confirm-alert {
+  &-body { 
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 550px;
+    padding: 30px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 75px rgb(0 0 0 / 13%);
+    color: vars.$primary-color-dark;
+
+    h1 {
+      font-weight: bold;
+      text-align: center;
+      display: block;
+      font-size: 1.6em;
+      margin-block-start: 0.67em;
+      margin-block-end: 0.67em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      color: #FFB703;
+    }
+  }
+
+  &-button-group {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    button {
+     background-color: vars.$primary-color-dark;
+     font-weight: bold;
+     text-transform: capitalize;
+    }
+    
+  }
+}
+
+
+@media screen and (max-width: 1345px) {
+  .card {
+    padding: 0px;
+
+    &-icon {
+      margin: 0.15em;
+    }
+  }
+
+  .wishlist {
+    &-content {
+      height: 300px;
+      padding: 0em;
+    }
+  }
+}

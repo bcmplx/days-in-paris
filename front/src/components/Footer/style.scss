@@ -1,0 +1,66 @@
+@use 'src/styles/vars';
+
+.footer {
+  position: relative;
+  background-color: vars.$primary-color;
+  display: flex;
+  justify-content: space-around;
+  padding: 2em;
+  color: #fff;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 730px) {
+    & {
+      justify-content: space-between;
+    }
+  }
+
+  &-section {
+    &:first-child{
+      max-width: 50%;
+
+      @media screen and (max-width: 730px) {
+        & {
+          max-width: 100%;
+          margin-bottom: 1em;
+        }
+      }
+    }
+    
+    &-title {
+      font-size: vars.$subtitle-size;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-bottom: 0.5em;
+    }
+  }
+
+  &-link {
+    padding: 0.2em 0em;
+    font: vars.$text-size;
+
+    &:hover {
+      color: vars.$secondary-color;
+    }
+  }
+
+  &-text {
+    line-height: 1.4;
+    text-align: justify;
+  }
+
+  &-credits {
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 0.5em;
+
+    @media screen and (max-width: 730px) {
+      & {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}

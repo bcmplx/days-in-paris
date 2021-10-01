@@ -1,0 +1,54 @@
+// Ajout du fichier de variables
+@use 'src/styles/vars';
+
+
+.sitemap {
+  height: 80vh;
+  padding: 3em 25em;
+  color: vars.$primary-color-dark;
+
+  &-title {
+    font-size: vars.$title-size;
+    color: vars.$primary-color-dark;
+    font-weight: 700;
+    font-family: vars.$secondary-font;
+    margin: 1em 0 0 0;
+    text-align: center;
+  }
+
+  &-subtitle {
+    text-align: center;
+    color: vars.$primary-color;
+    font-size: vars.$subtitle-size;
+    font-weight: bold;
+  }
+
+  &-total {
+    color: vars.$primary-color;
+    font-size: vars.$subtitle-size;
+    font-weight: bold;
+    margin-top: 2em;
+  }
+
+  a {
+    color: vars.$secondary-color;
+    font-weight: bold;
+  }
+
+  &-home-page {
+    margin: 1em 3em;
+  }
+
+}
+
+@media screen and (max-width: 1430px) {
+  .sitemap {
+    padding: 3em 10em;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .sitemap {
+    padding: 2em 3em;
+  }
+}

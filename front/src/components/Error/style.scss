@@ -1,0 +1,81 @@
+@use 'src/styles/vars';
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+#notfound {
+  position: relative;
+  height: 90vh;
+}
+
+#notfound .notfound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.notfound {
+  max-width: 710px;
+  width: 100%;
+  text-align: center;
+  padding: 0px 15px;
+  line-height: 1.4;
+}
+
+.notfound .notfound-404 {
+  height: 200px;
+  line-height: 200px;
+}
+
+.notfound .notfound-404 h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 168px;
+  margin: 0px;
+  color: vars.$primary-color;
+  text-transform: uppercase;
+}
+
+.notfound h2 {
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #222;
+  margin-bottom: 0.5em;
+}
+
+.notfound-search {
+  position: relative;
+  padding-right: 123px;
+  max-width: 420px;
+  width: 100%;
+  margin: 30px auto 22px;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  color: vars.$primary-color;
+  font-size: 1.3em;
+}
+
+.arrow {
+  color: vars.$primary-color;
+  font-weight: 500;
+  font-size: 1.3em;
+}
+
+@media only screen and (max-width: 767px) {
+  .notfound .notfound-404 {
+    height: 122px;
+    line-height: 122px;
+  }
+  .notfound .notfound-404 h1 {
+    font-size: 122px;
+  }
+}

@@ -1,0 +1,129 @@
+@use 'src/styles/vars';
+
+.profile {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+
+  &-img {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-position: center;
+    background-size: cover;
+  }
+
+  &-infos {
+    width: 600px;
+    margin: 5em auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 20px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: vars.$primary-color-dark;
+
+    &-title {
+      font-size: vars.$title-size;
+      font-weight: vars.$bold-weight;
+      margin: 1.9em 0 1em 0;
+    }
+
+    &-content {
+      width: 70%; 
+
+       &-basics {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &-title {
+          font-weight: bold;
+
+        }
+
+        &-content {
+          span {
+            margin-left: 1em;
+          }
+
+          &-close-icon {
+            font-weight: 900;
+            font-size: 1.2em;
+          }
+        }
+
+        &-error {
+          font-size: 0.8em;
+          color: rgb(182, 32, 32);
+          text-align: center;
+          margin: 0.3em;
+        }
+
+        &-form {
+          &-input {
+            border: 1px solid vars.$primary-color-light;
+            padding: 0.25em;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+          }
+          &-button {
+            background-color: vars.$primary-color;
+            border: none;
+            color: white;
+            padding: 0.25em;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+          }
+        }
+      }  
+    }
+
+    &-delete-account{
+      margin-top: 1em;
+      
+      &:hover {
+      color: rgb(182, 32, 32);
+      }
+    }
+  }
+}    
+
+@media screen and (max-width: 630px) {
+  .profile {
+    &-infos {
+      width: 90%;
+
+      &-title {
+        text-align: center;
+      }
+
+      &-content {
+        width: 80%; 
+  
+         &-basics {  
+          &-form {
+            margin-left: 0.5em;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            &-input {
+              width: 75%;
+            }
+
+          }
+        }  
+      }
+      &-delete-account{
+        color: rgb(182, 32, 32);
+      }
+    }
+  }
+}

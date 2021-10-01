@@ -1,0 +1,43 @@
+@use 'src/styles/vars';
+
+.password-check {
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 50%;
+
+  &-container {
+    display: flex;
+    color: vars.$primary-color-dark;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.3em;
+    
+    &-icon {
+      font-size: 1.5em;
+      // margin-right: 1em;
+    }
+
+    &-condition {
+      font-size: vars.$text-size;
+    }
+  }
+
+  .opacity {
+    opacity: 0;
+  }
+
+  .green {
+    color: #089404;
+  }
+
+  .red {
+    color: #cc0000
+  }
+
+  @media screen and (max-width: 600px) {
+    & {
+      width: 80%;
+    }
+  }
+}

@@ -1,0 +1,130 @@
+@use 'src/styles/vars';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: vars.$primary-color;
+  align-items: center;
+  padding: 0.2 2em;
+  color: #fff;
+  font-size: vars.$subtitle-size;
+
+  &-logo {
+    width: 250px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &-list {
+    display: flex;
+    align-items: center;
+  }
+
+  &-dropdown {
+    display: none;
+    margin-right: 0.5em;
+  }
+
+  &-link {
+    margin-right: 1em;
+    font-size: vars.$text-size;
+    color: white;
+
+    &:hover {
+      color: vars.$secondary-color;
+      
+    }
+  }
+
+  &-user {
+    margin-right: 0.2em;
+    font-size: 1.3em;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 665px) {
+    &-list {
+      display: none;
+    }
+    // DROPDOWN
+
+    &-dropdown {
+      display: inline-block;
+      position: relative;
+
+      &:hover {
+        .dd-menu {
+          display: block;
+        }
+      }
+    }
+    
+    .dd-button {
+      display: inline-block;
+      cursor: pointer;
+      white-space: nowrap;
+      z-index: 0;
+    }
+    
+    
+    .dd-menu {
+      display: none;
+      position: absolute;
+      top: 27px;
+      right: -10px;
+      // border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0;
+      margin: 2px 0 0 0;
+      box-shadow: -1px 4px 6px 0 rgba(0,0,0,0.1);
+      background-color: vars.$primary-color;
+      // background-color: #ffffff;
+      list-style-type: none;
+      z-index: 1001;
+    }
+    
+    .dd-input + .dd-menu {
+      display: none;
+    } 
+    
+    .dd-input:checked + .dd-menu {
+      display: block;
+    } 
+    
+    .dd-menu li {
+      padding: 10px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      // color: vars.$primary-color;
+      color: white;
+    }
+    
+    // .dd-menu li:hover {
+    //   background-color: red;
+    // }
+    
+    .dd-menu li a {
+      display: block;
+      margin: -10px -20px;
+      padding: 10px 20px;
+    }
+    
+    .dd-menu li.divider{
+      padding: 0;
+      border-bottom: 1px solid #cccccc;
+    }
+  }
+}
+
+.selected {
+  font-weight: bold;
+  //color: vars.$secondary-color;
+}
+
+
+  

@@ -1,0 +1,8 @@
+@use 'src/styles/vars';
+
+.marker {
+  font-size: 2em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #DF2626;
+}

@@ -1,0 +1,192 @@
+// Ajout du fichier de variables
+@use 'src/styles/vars';
+
+.mobile {
+  display: none;
+}
+
+.home {
+    height: 100vh;
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+  &-introduction {
+    // margin: 3em 0 2em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+
+  &-title {
+    font-size: vars.$title-size;
+    color: vars.$primary-color-dark;
+    // margin-top: 1em;
+    font-weight: 700;
+    font-family: vars.$secondary-font
+  }
+
+  &-description {
+    font-size: vars.$subtitle-size;
+    text-align: center;
+    //line-height: 1.1;
+    //margin-top: 0.8em;
+    font-weight: 400;
+  }
+
+  }
+  &-swiper {
+    width: 100%;
+    height: 440px;
+    padding: 2em;
+    
+    &-slide {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      z-index: 0;
+
+      &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        right: 0px;
+        background: vars.$secondary-color;
+        height: 60px;
+        width: 60px;
+        border-radius: 0 20px 0 55px;
+        transform: scale(1);
+        transform-origin: 50% 50%;
+        transition: transform 0.25s ease-out;
+        opacity: 0.9;
+      }
+
+      &:hover:before {
+        transform: scale(50);
+      }
+
+      &:hover {
+        .home-swiper-slide-title {
+          color: #fff;
+          transition: all 0.3s ease-out;
+        }
+
+        .home-swiper-slide-description {
+          transition: all 0.3s ease-out;
+          opacity: 1;
+        }
+      }
+      
+      &-description {
+        position: absolute;
+        bottom: 70px;
+        text-align: center;
+        opacity: 0;
+        color: #fff;
+      }
+
+      &-title {
+        margin-top: 2em;
+        // color: vars.$secondary-color;
+        color:white;
+        font-size: vars.$title-size;
+        font-weight: vars.$bold-weight;
+        text-transform: uppercase; 
+        background-color: vars.$secondary-color;;        
+      }
+
+      &-corner {
+        position: absolute;
+        background-color: vars.$secondary-color;
+        width: 60px;
+        height: 60px;
+        top: 0px;
+        right: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0 20px 0 55px;
+      }
+
+      &-icon {
+        // position: absolute;
+        font-size: 2.5em;
+        // top: 5px;
+        // right: 5px;
+        color: #fff;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+
+      }
+    }
+  }
+
+  &-link {
+    margin-top: 1em;
+    background-color: vars.$secondary-color;
+    color: white; 
+    padding: 0.5em 0.8em;
+    border-radius: 20px;
+    font-weight: vars.$bold-weight;
+    text-transform: uppercase;
+    font-size: vars.$subtitle-size;
+    border: 3px solid vars.$secondary-color;
+    transition: all 0.2s ease-in-out;
+
+    
+    &:hover {
+      border: 3px solid vars.$secondary-color;
+      background-color: vars.$primary-color-light;
+      color: vars.$secondary-color;
+    }
+  }
+
+  .swiper-pagination {
+    bottom: 0px;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: vars.$primary-color;
+    width: 25px;
+    height: 5px;
+    border-radius: 5px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: vars.$primary-color-dark;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .home-swiper-slide-title{
+    font-size: 1.5em;
+  }
+  .home-introduction-title {
+    text-align: center;
+    margin-top: 0.5em;
+  }
+}
+
+@media screen and (max-width: 750px) {
+ .mobile{
+   display: inline-block;
+ }
+
+ .desktop {
+   display: none;
+ }
+}

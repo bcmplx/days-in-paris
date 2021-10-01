@@ -1,0 +1,116 @@
+// Ajout du fichier de variables
+@use 'src/styles/vars';
+
+.team {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    
+  &-card {
+    position: relative;
+    background-color: white;
+    width: 19%;
+    height: 19em;
+    border-radius: 15px;
+    margin: 0 2em;
+    box-shadow: 6px 5px 0px 0px #a0afc7;
+    
+    &-img {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      top: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-position: center;
+      background-size: cover;
+    }
+
+    &-header {
+      height: 42%;
+      background-color: vars.$primary-color;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+
+      &-name {
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 0.6em;
+        font-size: 1.5em;
+        text-align: center;
+      }
+    }
+
+    &-content {
+      text-align: center;
+
+      &-role {
+        font-family: vars.$secondary-font;
+        color: vars.$primary-color-dark;
+        font-size: vars.$title-size;
+        margin: 0.5em;
+        line-height: 0.7em;
+
+        &-subrole {
+          font-size: 0.7em;
+        }
+      }
+
+      &-quote{
+        color: vars.$primary-color;
+        margin: 0 1em 1em 1em;
+      }
+    }
+  }
+}
+
+.radio-btns {
+
+  &__btn:hover {
+    transform: translate(-30px, -30px);
+  }
+
+  &:hover .radio-btns__btn:not(:hover) {
+    filter: grayscale(75%);
+
+    &::after {
+      background-color: rgba(rgb(63, 85, 145), 0.5);
+    }
+  }
+}
+
+
+@media screen and (max-width: 1735px){
+  .team {
+    &-card {
+      height: 21.5em;
+    }
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .team {
+    flex-wrap: wrap;
+    //flex-direction: column;
+    margin-top: 3em;
+    &-card {
+      min-width: 220px;
+      margin: 3em 1em;
+      
+    }
+  }
+
+  .radio-btns {
+    &__btn:hover {
+      transform: none;
+
+    }
+  }
+}
