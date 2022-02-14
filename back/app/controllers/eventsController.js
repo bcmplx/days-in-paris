@@ -3,6 +3,46 @@ const Event = require('../models/event')
 //Un controlleur qui contient toutes les fonctionnalites concernant la page d'activites
 const eventController = {
 
+	findAllHereCtrl: async (req,res,next) => {
+        try {
+			console.log(req.body.category)
+            let eventsContent = await Event.findAllHere(req.body.category)
+            let events = eventsContent.results.items
+            // let types = eventsContent.uniqueTypes
+ 
+            // events = await Event.addValues(events)
+			
+            const photos = await Event.findPexelPhotos(events)
+			// console.log(photos)
+            // res.json(events)   
+
+            res.json({events, photos})   
+            
+        } catch (error) {
+            res.status(500).send(error.message)
+        }
+    },
+
+	findHereCtrl: async (req,res,next) => {
+        try {
+
+            let eventsContent = await Event.findHere()
+            let events = eventsContent.results.items
+            // let types = eventsContent.uniqueTypes
+ 
+            // events = await Event.addValues(events)
+			
+            const photos = await Event.findPexelPhotos(events)
+			// console.log(photos)
+            // res.json(events)   
+
+            res.json({events, photos})   
+            
+        } catch (error) {
+            res.status(500).send(error.message)
+        }
+    },
+
     //================ API Google Places ==================
 
     //Fonction asynchrone qui renvoie toutes les activites avec leurs types ainsi que leurs photos via le modele Event
@@ -12,8 +52,7 @@ const eventController = {
             let eventsContent = await Event.findAll()
             let events = eventsContent.events_info
             let types = eventsContent.uniqueTypes
-
-            //Remplace la valeur 'undefined' que peut nous renvoyer l'API Google Places par 0  
+ 
             events = await Event.addValues(events)
             const photos = await Event.findPhotos(events.results)
             res.json({events, photos, types})   

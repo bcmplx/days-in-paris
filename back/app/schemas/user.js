@@ -9,7 +9,7 @@ const schema = Joi.object({
         .required(),
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } })
-        .required,
+        .required(),
     password: Joi.string()
         .pattern(new RegExp('^[a-zA-Z0-9]{3,20}$')),
     repeat_password: Joi.ref('password'),

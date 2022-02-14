@@ -10,45 +10,167 @@ class Event {
         }
     }
 
-    //Fonction asynchrone qui renvoie toutes les activites 
-    static async findAll(){
+	static async findAllHere(event){
+		try {
+			console.log(event)
+			let events_info = await fetch(
+				`https://places.ls.hereapi.com/places/v1/discover/explore?at=48.8634%2C2.3377&cat=${event}&apiKey=pSp61gPzAgERYwx-NUlc6OqphGKswuy1WWp3BccHQ98`
+			).then(value => value.json());
+				console.log(events_info)
+				return events_info
+					
+		} catch (error) {
+			errorCatch(error)
+		}
+	}
+
+	static async findHere(){
+		try {
+			let events_info = await fetch(
+				'https://places.ls.hereapi.com/places/v1/discover/explore?at=48.8634%2C2.3377&cat=sights-museums&apiKey=pSp61gPzAgERYwx-NUlc6OqphGKswuy1WWp3BccHQ98'
+			).then(value => value.json());
+			
+				return events_info
+					
+		} catch (error) {
+			errorCatch(error)
+		}
+	}
+	static async findPexelPhotos(events) {
         try {
+			// console.log(events[0])
+            const photos = async () => {
 
-            //On fait une requete API grace a fetch
-            //On utilise API Google Places pour avoir une liste des points d'interet les plus importants
-            let events_info = await fetch('https://maps.googleapis.com/maps/api/place/textsearch/json?query=paris+city+point+of+interest&language=fr&key=AIzaSyBtNnMdadxuQ_-r2rv6iBPjDrTacKbabcI').then(value => value.json());
+				// const test = await fetch(`https://api.pexels.com/v1/search?query=${events[0].title}&per_page=1&orientation=portrait`,{
+				// 						headers: {
+				// 						  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
+				// 						}
+				// }).then(data => data.json())
+				// const result = test.then(data => {console.log(data)})
+				// console.log(test.photos[0].url)
 
+                const newTab =  await Promise.all(events.map(el => {
+					const titre = el.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+					// console.log(titre)
+
+					// const test = fetch(`https://api.pexels.com/v1/search?query=${events[0].title}&per_page=1&orientation=portrait`,{
+					// 					headers: {
+					// 					  Authorization: "563492ad6f917000010000012ecdbe705d0644aa989cde8b8d7cb8f2"
+					// 					}
+					// }).then(data => data.json()).then(data => {
+					// 	console.log(data)
+
+					// })
+
+					// console.log(test.photos[0].url)
+
+					return new Promise(                     
+						(resolve, reject) => {                         
+							resolve(                               
+								fetch(`https://api.pexels.com/v1/search?query=${titre}&per_page=1`,{
+									headers: {
+									  Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
+									}
+								  })
+								  
+								.then(data => {   
+									// console.log(data.json())
+									return data.json()
+									
+									})
+								
+							
+							)
+						})
+
+
+
+
+
+                    if (!el.photos){
+                        return new Promise(                     
+                            (resolve, reject) => {                         
+                                resolve(                               
+                                    fetch(`https://api.pexels.com/v1/search?query=${titre}&per_page=1&orientation=portrait`,{
+										headers: {
+										  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
+										}
+									  })
+									  
+                                    .then(data => {   
+										data.json()
+										// return data.photos[0].url
+										
+                                        })
+									
+									// .then(data => {
+										
+									// 	return data.photos[0].url
+									// })
+                                )
+                            })
+                    }
+                    else {
+                        return "No photo available for this event"
+                    }
+                }))
+
+				
                 
-                let typesArray = [];
-                let result = [];
-                
-                events_info.results.forEach(element => {
-                    typesArray.push(element.types);
-                    typesArray.forEach(el => {                  
-                        el.forEach(data => {
-                            result.push(data)
-                        }) 
-                    })
-                });
-                let uniqueTypes = [...new Set(result)]    
-                return {events_info, uniqueTypes}
-                   
+                return newTab.map(element => {
+					console.log(element.photos[0].src)
+					return  element.photos[0].src.large
+				})
+                // return test
+
+            }
+            return photos()
+             
         } catch (error) {
             errorCatch(error)
         }
-    }
+    } 
+
+    //Fonction asynchrone qui renvoie toutes les activites 
+static async findAll(){
+	try {
+		let events_info = await fetch(
+			'https://maps.googleapis.com/maps/api/place/textsearch/json?query=paris+city+point+of+interest&language=fr&key=AIzaSyBtNnMdadxuQ_-r2rv6iBPjDrTacKbabcI'
+		).then(value => value.json());
+			
+			let typesArray = [];
+			let result = [];
+			
+			events_info.results.forEach(element => {
+				typesArray.push(element.types);
+				typesArray.forEach(el => {                  
+					el.forEach(data => {
+						result.push(data)
+					}) 
+				})
+			});
+			let uniqueTypes = [...new Set(result)]    
+			return {events_info, uniqueTypes}
+				
+	} catch (error) {
+		errorCatch(error)
+	}
+}
 
     //Fonction asynchrone qui renvoie la page uivante des points d'interet
-    static async findAllNextPage(nextpage){
-        try {
-            let events_info = await fetch('https://maps.googleapis.com/maps/api/place/textsearch/json?query=paris+city+point+of+interest&language=fr&key=AIzaSyBtNnMdadxuQ_-r2rv6iBPjDrTacKbabcI&pagetoken='+ nextpage).then(value => value.json());
-                            
-            return events_info
+static async findAllNextPage(nextpage){
+	try {
+		let events_info = await fetch(
+			'https://maps.googleapis.com/maps/api/place/textsearch/json?query=paris+city+point+of+interest&language=fr&key=AIzaSyBtNnMdadxuQ_-r2rv6iBPjDrTacKbabcI&pagetoken='
+			+ nextpage
+		).then(value => value.json());
+						
+		return events_info
 
-        } catch (error) {
-            errorCatch(error)
-        }
-    }
+	} catch (error) {
+		errorCatch(error)
+	}
+}
 
     //Fonction asynchrone qui renvoie toutes les activites filtrees par categories (+ la page suivante)
     static async findWithFilter(cat, nextpage){
@@ -80,11 +202,9 @@ class Event {
     static async addValues(content){
         try {
             content.results.forEach(el => {
-                // console.log(el.user_ratings_total)
                 if(el.user_ratings_total) {
                     return el
                 }
-                //Si valeur d'activite est undefined on lui attribue la valeur 0
                 else {
                     el.user_ratings_total = 0;
                     el.rating = 0
@@ -101,17 +221,19 @@ class Event {
     static async findPhotos(events) {
         try {
 
-            //Fonction asynchrone pour renvoyer toutes les references photo depuis params
             const photos = async () => {
 
                 const newTab = await Promise.all(events.map(el => {
 
-                    //On retourne l'URL de la photo
                     if (el.photos){
                         return new Promise(                     
                             (resolve, reject) => {                         
                                 resolve(                               
-                                    fetch(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${el.photos[0].photo_reference}&language=fr&key=AIzaSyBtNnMdadxuQ_-r2rv6iBPjDrTacKbabcI`)
+                                    fetch(
+										`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${
+											el.photos[0].photo_reference
+										}&language=fr&key=AIzaSyBtNnMdadxuQ_-r2rv6iBPjDrTacKbabcI`
+									)
                                     .then(data => {   
                                         return data.url})
                                 )

@@ -15,6 +15,9 @@ const adminController = require('./controllers/adminController');
 
 
 // Routes Event Controller
+router.get('/activitiesHere', eventController.findHereCtrl); 
+router.post('/activitiesHere', eventController.findAllHereCtrl); 
+
 router.get('/activities', eventController.findAllEvents); 
 router.post('/activities', eventController.findAllEventsNextPage); 
 router.post('/activities/category', eventController.findEventsByCategories); 
