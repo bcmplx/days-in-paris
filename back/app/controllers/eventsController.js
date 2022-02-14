@@ -6,13 +6,14 @@ const eventController = {
 	findAllHereCtrl: async (req,res,next) => {
         try {
 			console.log(req.body.category)
-            let eventsContent = await Event.findAllHere(req.body.category)
-            let events = eventsContent.results.items
+            let eventsContent2 = await Event.findAllHere(req.body.category)
+            let events = eventsContent2.results.items
+			// console.log(events[0])
             // let types = eventsContent.uniqueTypes
  
             // events = await Event.addValues(events)
 			
-            const photos = await Event.findPexelPhotos(events)
+             const photos = await Event.findPexelPhotos(events)
 			// console.log(photos)
             // res.json(events)   
 
@@ -31,7 +32,7 @@ const eventController = {
             // let types = eventsContent.uniqueTypes
  
             // events = await Event.addValues(events)
-			
+			// console.log(events[0])
             const photos = await Event.findPexelPhotos(events)
 			// console.log(photos)
             // res.json(events)   
