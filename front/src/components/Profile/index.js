@@ -19,6 +19,7 @@ import './style.scss';
 
 const Profile = ({ isLogged, changeHeader, handleDeleteAccount }) => {
   const history = useHistory();
+
   const [currentUser, setCurrentUser] = useState({
     firstName: '',
     lastName: '',
@@ -26,15 +27,13 @@ const Profile = ({ isLogged, changeHeader, handleDeleteAccount }) => {
     imgUrl: '',
     createdAt: '',
   });
+
   const [edit, setEdit] = useState({
     lastName: false,
     firstName: false,
     email: false,
   });
 
-  // const [lastNameForm, setLastNameForm] = useState('');
-  // const [firstNameForm, setFirstNameForm] = useState('');
-  // const [emailForm, setEmailForm] = useState('');
   const [form, setForm] = useState({
     lastName: '',
     firstName: '',
@@ -71,9 +70,6 @@ const Profile = ({ isLogged, changeHeader, handleDeleteAccount }) => {
             firstName: firstName,
             email: email,
           });
-          // setLastNameForm(lastName);
-          // setFirstNameForm(firstName);
-          // setEmailForm(email);
         })
         .catch((e) => {
           console.error(e);

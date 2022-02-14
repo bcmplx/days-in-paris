@@ -53,12 +53,15 @@ const Activities = ({ isLogged }) => {
     setLoader(true);
     try {
       const response = await api.get('/activities');
-      const events = response.data.events.results;
-      console.log(response);
-      const data = events.map((elem, index) => (
+      const response2 = await api.get('/activitiesHere');
+      // const events = response.data.events.results;
+      const events2 = response2.data;
+
+      console.log(events2);
+      const data = events2.events.map((elem, index) => (
         {
           ...elem,
-          photoUrl: response.data.photos[index],
+          photoUrl: response2.data.photos[index],
         }
       ));
       setTokenAll(response.data.events.next_page_token);
@@ -80,7 +83,7 @@ const Activities = ({ isLogged }) => {
     setLoader(false);
 
     // add active class to all menu
-    const activeMenu = document.querySelector('#All');
+    const activeMenu = document.querySelector('#sights-museums');
     activeMenu.classList.add('active');
   }, [isLogged]);
 
@@ -129,7 +132,7 @@ const Activities = ({ isLogged }) => {
   };
 
   const getFilterActivities = () => filterActivities.filter((activity) => (
-    activity.name.toLowerCase().includes(inputValue.toLowerCase())
+    activity.title.toLowerCase().includes(inputValue.toLowerCase())
   ));
 
   const nextPage = async () => {
@@ -159,7 +162,7 @@ const Activities = ({ isLogged }) => {
 
   // Fonction de filter par categories (pour le menu de gauche)
   const getFilterActivitiesByCategories = async (e) => {
-    if (e.target.dataset.name === 'All') {
+    if (e.target.dataset.name === 'sights-museums') {
       setFilterActivities(allActivities);
       setNextPageToken({
         nextPage: nextPageTokenAllActivities,
@@ -172,7 +175,7 @@ const Activities = ({ isLogged }) => {
         console.log(e.target.dataset.name);
         console.log(nextPageToken);
 
-        const { data } = await api.post('/activities/category', {
+        const { data } = await api.post('/activitiesHere', {
           category: e.target.dataset.name,
           nextPage: '',
         });
@@ -255,17 +258,17 @@ const Activities = ({ isLogged }) => {
           </form>
           <div className="activities-select">
             <select onChange={getFilterActivitiesByCategories}>
-              <option data-name="All">Toutes les activités</option>
-              <option data-name="tourist_attraction">Monuments</option>
-              <option data-name="museum">Musée</option>
-              <option data-name="point_of_interest">Point d'intérêt</option>
-              <option data-name="establishment">Établissement</option>
-              <option data-name="church">Église</option>
-              <option data-name="place_of_worship">Lieu de culte</option>
-              <option data-name="park">Parc</option>
-              <option data-name="amusement_park">Parc d'attractions</option>
+              {/* <option data-name="All">Toutes les activités</option> */}
+              {/* <option data-name="tourist_attraction">Monuments</option> */}
+              <option data-name="sights-museums">Musées</option>
+              <option data-name="accomodation">Accomodations</option>
+              <option data-name="leisure-outdoor">Leisure - Outdoor</option>
               <option data-name="restaurant">Restaurants</option>
-              <option data-name="food">Food</option>
+              <option data-name="airport">Airport</option>
+              <option data-name="shopping">Shopping</option>
+              {/* <option data-name="amusement_park">Parc d'attractions</option>
+              <option data-name="restaurant">Restaurants</option>
+              <option data-name="food">Food</option> */}
             </select>
           </div>
           {/* Modal */}

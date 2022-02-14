@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://sinbad-days-in-paris.herokuapp.com',
-  // baseURL: 'http://localhost:3000',
+  // baseURL: 'https://sinbad-days-in-paris.herokuapp.com',
+  baseURL: 'http://localhost:3000',
   timeout: 1500000,
 });
 
