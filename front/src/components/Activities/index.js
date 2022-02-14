@@ -52,21 +52,21 @@ const Activities = ({ isLogged }) => {
     // C'est d'ailleurs ici que l'on viendra faire l'appel de l'API
     setLoader(true);
     try {
-      const response = await api.get('/activities');
+      // const response = await api.get('/activities');
       const response2 = await api.get('/activitiesHere');
       // const events = response.data.events.results;
       const events2 = response2.data;
 
-      console.log(events2);
+      // console.log(events2);
       const data = events2.events.map((elem, index) => (
         {
           ...elem,
           photoUrl: response2.data.photos[index],
         }
       ));
-      setTokenAll(response.data.events.next_page_token);
+      // setTokenAll(response.data.events.next_page_token);
       setNextPageToken({
-        nextPage: response.data.events.next_page_token,
+        // nextPage: response.data.events.next_page_token,
         category: 'All',
       });
       setAllActivities(data);
@@ -139,7 +139,7 @@ const Activities = ({ isLogged }) => {
     setLoaderNextPage(true);
     try {
       const { data } = await api.post('/activities/category', nextPageToken);
-      console.log(data);
+      // console.log(data);
 
       const events = data.events.results;
       const newTab = events.map((elem, index) => (
@@ -163,6 +163,7 @@ const Activities = ({ isLogged }) => {
   // Fonction de filter par categories (pour le menu de gauche)
   const getFilterActivitiesByCategories = async (e) => {
     if (e.target.dataset.name === 'sights-museums') {
+      console.log('museums ligne 166');
       setFilterActivities(allActivities);
       setNextPageToken({
         nextPage: nextPageTokenAllActivities,
@@ -172,15 +173,18 @@ const Activities = ({ isLogged }) => {
     else {
       setLoader(true);
       try {
-        console.log(e.target.dataset.name);
-        console.log(nextPageToken);
+        // console.log(e.target.dataset.name);
+        //  console.log(nextPageToken);
+		console.log('ligne 178 ', e.target.dataset.name);
+
 
         const { data } = await api.post('/activitiesHere', {
           category: e.target.dataset.name,
           nextPage: '',
         });
-        console.log(data.events.results);
-        const events = data.events.results;
+        console.log(data);
+        const events = data.events;
+        // console.log(events);
         const newTab = events.map((elem, index) => (
           {
             ...elem,
