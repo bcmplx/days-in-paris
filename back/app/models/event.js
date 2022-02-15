@@ -30,7 +30,7 @@ class Event {
 			let events_info = await fetch(
 				'https://places.ls.hereapi.com/places/v1/discover/explore?at=48.8634%2C2.3377&cat=sights-museums&apiKey=pSp61gPzAgERYwx-NUlc6OqphGKswuy1WWp3BccHQ98'
 			).then(value => value.json());
-				console.log("ligne 32", events_info.results.items)	
+				console.log("ligne 33", events_info.results.items)	
 				return events_info
 					
 		} catch (error) {
@@ -55,8 +55,8 @@ class Event {
 								fetch(`https://api.pexels.com/v1/search?query=${titre}&per_page=1`,{
 									headers: {
 									//   Authorization: "563492ad6f917000010000012ecdbe705d0644aa989cde8b8d7cb8f2"
-									  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
-									//   Authorization: "563492ad6f917000010000012ecdbe705d0644aa989cde8b8d7cb8f2"
+									//   Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
+									  Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
 
 									}
 								  })
@@ -73,19 +73,27 @@ class Event {
 
                 }))
 
-				 console.log("ligne 73", newTab)
+				 console.log("ligne 76", newTab[0])
                 // console.log('ligne 74', newTab[0].photos[0].src.large)
                 return newTab.map(element => {
-					 
-					return  element.photos[0].src.large
+					// console.log(element)
+					if (element.photos[0]?.src?.large) {
+						return element.photos[0].src.large
+					}
+					else {
+						return newTab[0].photos[0].src.large
+					}
+					
 				})
                 
 
             }
+			console.log("fin photos()")
 			// console.log(photos())
             return photos()
              
         } catch (error) {
+			console.log(error)
             errorCatch(error)
         }
     } 

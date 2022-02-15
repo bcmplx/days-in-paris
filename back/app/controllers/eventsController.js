@@ -16,10 +16,11 @@ const eventController = {
              const photos = await Event.findPexelPhotos(events)
 			// console.log(photos)
             // res.json(events)   
-
+			console.log("juste avant")
             res.json({events, photos})   
             
         } catch (error) {
+			console.log(error)
             res.status(500).send(error.message)
         }
     },
