@@ -182,6 +182,7 @@ const Activities = ({ isLogged }) => {
           category: e.target.dataset.name,
           nextPage: '',
         });
+        console.log("ligne 185")
         console.log(data);
         const events = data.events;
         // console.log(events);
