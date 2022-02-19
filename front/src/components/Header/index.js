@@ -15,6 +15,7 @@ import logo from 'src/assets/images/daysinparis-microcontour.png';
 import './style.scss';
 
 const Header = ({ currentUser, logoutUser }) => (
+  
   <header className="header">
     <Link to="/">
       <div className="header-logo">

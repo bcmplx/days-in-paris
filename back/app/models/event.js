@@ -12,12 +12,12 @@ class Event {
 
 	static async findAllHere(event){
 		try {
-			console.log(event)
-			let events_info = await fetch(
+			console.log("ligne 15", event)
+			let events_info2 = await fetch(
 				`https://places.ls.hereapi.com/places/v1/discover/explore?at=48.8634%2C2.3377&cat=${event}&apiKey=pSp61gPzAgERYwx-NUlc6OqphGKswuy1WWp3BccHQ98`
 			).then(value => value.json());
-				console.log(events_info)
-				return events_info
+				console.log("ligne 19", events_info2)
+				return events_info2
 					
 		} catch (error) {
 			errorCatch(error)
@@ -26,10 +26,11 @@ class Event {
 
 	static async findHere(){
 		try {
+			console.log("ligne 29 : findHere method")
 			let events_info = await fetch(
 				'https://places.ls.hereapi.com/places/v1/discover/explore?at=48.8634%2C2.3377&cat=sights-museums&apiKey=pSp61gPzAgERYwx-NUlc6OqphGKswuy1WWp3BccHQ98'
 			).then(value => value.json());
-			
+				console.log("ligne 33", events_info.results.items)	
 				return events_info
 					
 		} catch (error) {
@@ -38,43 +39,30 @@ class Event {
 	}
 	static async findPexelPhotos(events) {
         try {
-			// console.log(events[0])
+			console.log('ligne 42, PexelPhotos : ', events[0].title)
             const photos = async () => {
 
-				// const test = await fetch(`https://api.pexels.com/v1/search?query=${events[0].title}&per_page=1&orientation=portrait`,{
-				// 						headers: {
-				// 						  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
-				// 						}
-				// }).then(data => data.json())
-				// const result = test.then(data => {console.log(data)})
-				// console.log(test.photos[0].url)
+
 
                 const newTab =  await Promise.all(events.map(el => {
+					console.log(el.title)
 					const titre = el.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-					// console.log(titre)
-
-					// const test = fetch(`https://api.pexels.com/v1/search?query=${events[0].title}&per_page=1&orientation=portrait`,{
-					// 					headers: {
-					// 					  Authorization: "563492ad6f917000010000012ecdbe705d0644aa989cde8b8d7cb8f2"
-					// 					}
-					// }).then(data => data.json()).then(data => {
-					// 	console.log(data)
-
-					// })
-
-					// console.log(test.photos[0].url)
+					
 
 					return new Promise(                     
 						(resolve, reject) => {                         
 							resolve(                               
 								fetch(`https://api.pexels.com/v1/search?query=${titre}&per_page=1`,{
 									headers: {
-									  Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
+									//   Authorization: "563492ad6f917000010000012ecdbe705d0644aa989cde8b8d7cb8f2"
+									  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
+									//   Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
+
 									}
 								  })
 								  
 								.then(data => {   
-									// console.log(data.json())
+									
 									return data.json()
 									
 									})
@@ -83,50 +71,35 @@ class Event {
 							)
 						})
 
-
-
-
-
-                    if (!el.photos){
-                        return new Promise(                     
-                            (resolve, reject) => {                         
-                                resolve(                               
-                                    fetch(`https://api.pexels.com/v1/search?query=${titre}&per_page=1&orientation=portrait`,{
-										headers: {
-										  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
-										}
-									  })
-									  
-                                    .then(data => {   
-										data.json()
-										// return data.photos[0].url
-										
-                                        })
-									
-									// .then(data => {
-										
-									// 	return data.photos[0].url
-									// })
-                                )
-                            })
-                    }
-                    else {
-                        return "No photo available for this event"
-                    }
                 }))
 
-				
-                
+				 console.log("ligne 76", newTab[1])
+                // console.log('ligne 74', newTab[0].photos[0].src.large)
                 return newTab.map(element => {
-					console.log(element.photos[0].src)
-					return  element.photos[0].src.large
+					// console.log(element)
+					if (element.photos[0]?.src?.large) {
+						return element.photos[0].src.large
+					}
+					else {
+						if (newTab[0].photos[0]?.src?.large) {
+							return newTab[0].photos[0].src.large
+						}
+						else {
+							return newTab[6].photos[0].src.large
+						}
+						
+					}
+					
 				})
-                // return test
+                
 
             }
+			console.log("fin photos()")
+			// console.log(photos())
             return photos()
              
         } catch (error) {
+			console.log(error)
             errorCatch(error)
         }
     } 

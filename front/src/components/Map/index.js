@@ -30,8 +30,11 @@ const Map = ({ appointments, notEmpty }) => {
         {notEmpty && appointments.map((appointment) => (
           <Marker
             className="map-marker"
-            lat={appointment.lat}
-            lng={appointment.lng}
+            // lat={appointment.lat}
+            lat={48.858476}
+            // lng={appointment.lng}
+
+            lng={2.342712}
             text={appointment.title}
             key={appointment.id}
           />
