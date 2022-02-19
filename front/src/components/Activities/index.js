@@ -188,7 +188,7 @@ const Activities = ({ isLogged }) => {
         // console.log(events);
         const newTab = events.map((elem, index) => (
           {
-            ...elem,
+            ...elem,           
             photoUrl: data.photos[index],
           }
         ));
@@ -212,11 +212,12 @@ const Activities = ({ isLogged }) => {
 
   // Configuration de la modal
 
-  const openModal = (location) => {
+  const openModal = (latloc, longloc) => {
+    // console.log(latloc);
     setPropsMap({
       center: {
-        lat: location.lat,
-        lng: location.lng,
+        lat: latloc,
+        lng: longloc,
       },
       zoom: 15,
     });
@@ -285,7 +286,7 @@ const Activities = ({ isLogged }) => {
           >
             <div style={{ height: '100%', width: '100%' }}>
               <GoogleMapReact
-                bootstrapURLKeys={{ key: 'AIzaSyDCqRoeXO6_-sKWQvZID-RmRtebhc-OhNs' }}
+                bootstrapURLKeys={{ key: 'AIzaSyDYC_OTe8juY384Y64gj6Kkxy542SHWvYA' }}
                 defaultCenter={propsMap.center}
                 defaultZoom={propsMap.zoom}
               >

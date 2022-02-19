@@ -22,7 +22,7 @@ const Activity = ({
 }) => (
   <div className="activities-card" style={{ backgroundImage: `url(${photoUrl})` }}>
     <MdFavorite className="activities-card-logo-fav" onClick={() => addActivity(title, photoUrl, position[0], position[1], vicinity)} />
-    <FaMapMarkerAlt className="activities-card-logo-marker" onClick={() => modal(position)} />
+    <FaMapMarkerAlt className="activities-card-logo-marker" onClick={() => modal(position[0], position[1])} />
     <div className="activities-card-data">
       <h2 className="activities-card-data-title">{title}</h2>
       <p className="activities-card-data-description">{vicinity}</p>
