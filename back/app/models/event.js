@@ -55,8 +55,8 @@ class Event {
 								fetch(`https://api.pexels.com/v1/search?query=${titre}&per_page=1`,{
 									headers: {
 									//   Authorization: "563492ad6f917000010000012ecdbe705d0644aa989cde8b8d7cb8f2"
-									//   Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
-									  Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
+									  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
+									//   Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
 
 									}
 								  })
@@ -73,7 +73,7 @@ class Event {
 
                 }))
 
-				 console.log("ligne 76", newTab[0])
+				 console.log("ligne 76", newTab[1])
                 // console.log('ligne 74', newTab[0].photos[0].src.large)
                 return newTab.map(element => {
 					// console.log(element)
@@ -81,7 +81,13 @@ class Event {
 						return element.photos[0].src.large
 					}
 					else {
-						return newTab[0].photos[0].src.large
+						if (newTab[0].photos[0]?.src?.large) {
+							return newTab[0].photos[0].src.large
+						}
+						else {
+							return newTab[6].photos[0].src.large
+						}
+						
 					}
 					
 				})
