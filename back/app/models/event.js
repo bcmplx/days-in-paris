@@ -26,11 +26,11 @@ class Event {
 
 	static async findHere(){
 		try {
-			console.log("ligne 29 : findHere method")
+			// console.log("ligne 29 : findHere method")
 			let events_info = await fetch(
 				'https://places.ls.hereapi.com/places/v1/discover/explore?at=48.8634%2C2.3377&cat=sights-museums&apiKey=pSp61gPzAgERYwx-NUlc6OqphGKswuy1WWp3BccHQ98'
 			).then(value => value.json());
-				console.log("ligne 33", events_info.results.items)	
+				// console.log("ligne 33", events_info.results.items)	
 				return events_info
 					
 		} catch (error) {
@@ -47,8 +47,7 @@ class Event {
 
                 const newTab =  await Promise.all(events.map(el => {
 					console.log(el.title)
-					const titre = el.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-					
+					let titre = el.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 
 					return new Promise(                     
 						(resolve, reject) => {                         
@@ -58,13 +57,19 @@ class Event {
 								  
 								.then(data => {   
 									
-									let result = data.json();
-									console.log(result)
+									return data.json();
+									
 									
 									})
 								.then(data => {   
-								
-									return data.json()
+									// console.log(data.photos.photo[0])
+									if (data.photos.photo[0]) {
+										return `https://farm${data.photos.photo[0].farm}.staticflickr.com/${data.photos.photo[0].server}/${data.photos.photo[0].id}_${data.photos.photo[0].secret}.jpg`
+
+									}
+									else {
+										return 'https://farm66.staticflickr.com/65535/51890848726_9fbe229bdb.jpg'
+									}
 									
 									})
 								
@@ -76,22 +81,7 @@ class Event {
 
 				 console.log("ligne 76", newTab[1])
                 // console.log('ligne 74', newTab[0].photos[0].src.large)
-                return newTab.map(element => {
-					// console.log(element)
-					if (element.photos[0]?.src?.large) {
-						return element.photos[0].src.large
-					}
-					else {
-						if (newTab[0].photos[0]?.src?.large) {
-							return newTab[0].photos[0].src.large
-						}
-						else {
-							return newTab[6].photos[0].src.large
-						}
-						
-					}
-					
-				})
+                return newTab
                 
 
             }
@@ -107,13 +97,13 @@ class Event {
 
 	static async findPexelPhotos(events) {
         try {
-			console.log('ligne 42, PexelPhotos : ', events[0].title)
+			// console.log('ligne 42, PexelPhotos : ', events[0].title)
             const photos = async () => {
 
 
 
                 const newTab =  await Promise.all(events.map(el => {
-					console.log(el.title)
+					// console.log(el.title)
 					const titre = el.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 					
 
@@ -123,8 +113,8 @@ class Event {
 								fetch(`https://api.pexels.com/v1/search?query=${titre}&per_page=1`,{
 									headers: {
 									//   Authorization: "563492ad6f917000010000012ecdbe705d0644aa989cde8b8d7cb8f2"
-									  Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
-									//   Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
+									//   Authorization: "563492ad6f917000010000014f316b8398e0433a9afb4aa65d1d0224"
+									  Authorization: "563492ad6f91700001000001f771bfef746f4150b1f4a7a5a4f5d7db"
 
 									}
 								  })
@@ -141,7 +131,7 @@ class Event {
 
                 }))
 
-				 console.log("ligne 76", newTab[1])
+				//  console.log("ligne 76", newTab[1])
                 // console.log('ligne 74', newTab[0].photos[0].src.large)
                 return newTab.map(element => {
 					// console.log(element)
@@ -162,7 +152,7 @@ class Event {
                 
 
             }
-			console.log("fin photos()")
+			// console.log("fin photos()")
 			// console.log(photos())
             return photos()
              
@@ -172,7 +162,7 @@ class Event {
         }
     } 
 
-    //Fonction asynchrone qui renvoie toutes les activites 
+    //Fonction asynchrone qui renvoie toutes les aactivitiesctivites 
 static async findAll(){
 	try {
 		let events_info = await fetch(
