@@ -13,10 +13,10 @@ const eventController = {
  
             // events = await Event.addValues(events)
 			
-             const photos = await Event.findPexelPhotos(events)
-			// console.log(photos)
+             const photos = await Event.findFlickrPhotos(events)
+			console.log(photos)
             // res.json(events)   
-			console.log("juste avant")
+			// console.log("juste avant")
             res.json({events, photos})   
             
         } catch (error) {
@@ -34,7 +34,7 @@ const eventController = {
  
             // events = await Event.addValues(events)
 			// console.log(events[0])
-            const photos = await Event.findPexelPhotos(events)
+            const photos = await Event.findFlickrPhotos(events)
 			// console.log(photos)
             // res.json(events)   
 

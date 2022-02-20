@@ -52,12 +52,9 @@ const Activities = ({ isLogged }) => {
     // C'est d'ailleurs ici que l'on viendra faire l'appel de l'API
     setLoader(true);
     try {
-      // const response = await api.get('/activities');
       const response2 = await api.get('/activitiesHere');
-      // const events = response.data.events.results;
       const events2 = response2.data;
 
-      // console.log(events2);
       const data = events2.events.map((elem, index) => (
         {
           ...elem,
@@ -139,7 +136,6 @@ const Activities = ({ isLogged }) => {
     setLoaderNextPage(true);
     try {
       const { data } = await api.post('/activities/category', nextPageToken);
-      // console.log(data);
 
       const events = data.events.results;
       const newTab = events.map((elem, index) => (
@@ -163,36 +159,37 @@ const Activities = ({ isLogged }) => {
   // Fonction de filter par categories (pour le menu de gauche)
   const getFilterActivitiesByCategories = async (e) => {
     if (e.target.dataset.name === 'sights-museums') {
-      console.log('museums ligne 166');
+      const activeMenu2 = document.querySelectorAll('.active');
+      activeMenu2.forEach((el) => {
+        el.classList.remove('active');
+      });
+
+      setLoader(true);
       setFilterActivities(allActivities);
       setNextPageToken({
         nextPage: nextPageTokenAllActivities,
         category: e.target.dataset.name,
       });
+      setLoader(false);
+      const activeMenu = document.querySelector(`#${e.target.dataset.name}`);
+      activeMenu.classList.add('active');
     }
     else {
       setLoader(true);
       try {
-        // console.log(e.target.dataset.name);
-        //  console.log(nextPageToken);
-		console.log('ligne 178 ', e.target.dataset.name);
-
-
         const { data } = await api.post('/activitiesHere', {
           category: e.target.dataset.name,
           nextPage: '',
         });
-        console.log("ligne 185")
-        console.log(data);
-        const events = data.events;
+        const { events } = data;
         // console.log(events);
         const newTab = events.map((elem, index) => (
           {
-            ...elem,           
+            ...elem,
             photoUrl: data.photos[index],
           }
         ));
-        console.log(newTab);
+        // console.log(newTab);
         setFilterActivities(newTab);
         setNextPageToken({
           nextPage: data.events.next_page_token,
@@ -264,17 +261,11 @@ const Activities = ({ isLogged }) => {
           </form>
           <div className="activities-select">
             <select onChange={getFilterActivitiesByCategories}>
-              {/* <option data-name="All">Toutes les activités</option> */}
-              {/* <option data-name="tourist_attraction">Monuments</option> */}
               <option data-name="sights-museums">Musées</option>
               <option data-name="accomodation">Accomodations</option>
               <option data-name="leisure-outdoor">Leisure - Outdoor</option>
               <option data-name="restaurant">Restaurants</option>
-              <option data-name="airport">Airport</option>
               <option data-name="shopping">Shopping</option>
-              {/* <option data-name="amusement_park">Parc d'attractions</option>
-              <option data-name="restaurant">Restaurants</option>
-              <option data-name="food">Food</option> */}
             </select>
           </div>
           {/* Modal */}
