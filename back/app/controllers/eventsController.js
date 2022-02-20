@@ -13,7 +13,7 @@ const eventController = {
  
             // events = await Event.addValues(events)
 			
-             const photos = await Event.findPexelPhotos(events)
+             const photos = await Event.findFlickrPhotos(events)
 			// console.log(photos)
             // res.json(events)   
 			console.log("juste avant")

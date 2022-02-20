@@ -37,6 +37,74 @@ class Event {
 			errorCatch(error)
 		}
 	}
+
+	static async findFlickrPhotos(events) {
+        try {
+			console.log('ligne 42, PexelPhotos : ', events[0].title)
+            const photos = async () => {
+
+
+
+                const newTab =  await Promise.all(events.map(el => {
+					console.log(el.title)
+					const titre = el.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+					
+
+					return new Promise(                     
+						(resolve, reject) => {                         
+							resolve(                               
+								fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=4138a369868bc3748d92be4aba39f880&tags=${titre}&per_page=1&page=1&format=json&nojsoncallback=1
+								`)
+								  
+								.then(data => {   
+									
+									let result = data.json();
+									console.log(result)
+									
+									})
+								.then(data => {   
+								
+									return data.json()
+									
+									})
+								
+							
+							)
+						})
+
+                }))
+
+				 console.log("ligne 76", newTab[1])
+                // console.log('ligne 74', newTab[0].photos[0].src.large)
+                return newTab.map(element => {
+					// console.log(element)
+					if (element.photos[0]?.src?.large) {
+						return element.photos[0].src.large
+					}
+					else {
+						if (newTab[0].photos[0]?.src?.large) {
+							return newTab[0].photos[0].src.large
+						}
+						else {
+							return newTab[6].photos[0].src.large
+						}
+						
+					}
+					
+				})
+                
+
+            }
+			console.log("fin photos()")
+			// console.log(photos())
+            return photos()
+             
+        } catch (error) {
+			console.log(error)
+            errorCatch(error)
+        }
+    }
+
 	static async findPexelPhotos(events) {
         try {
 			console.log('ligne 42, PexelPhotos : ', events[0].title)
